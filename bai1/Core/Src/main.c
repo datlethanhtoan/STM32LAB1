@@ -93,10 +93,26 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  int hour, minute,  second = 7;
+  int count_s = 0;
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  setNumberOnClock(hour);
+	 // setNumberOnClock(minute);
+	 // setNumberOnClock(second);
+	  /*count_s += 1;
+	  int temp = count_s % 5;
+	  if(temp == 0)
+	  {
+		  second++;
+		  if(second > 11)
+		  {
+			  second = 0;
+			  count_s = 0;
+		  }
+	  }*\
+     HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
