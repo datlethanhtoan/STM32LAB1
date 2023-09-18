@@ -91,10 +91,14 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
+   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 1);
+   while (1)
+   {
     /* USER CODE END WHILE */
-
+	   HAL_GPIO_TogglePin (GPIOA , GPIO_PIN_5 );
+	   HAL_GPIO_TogglePin (GPIOA , GPIO_PIN_6 );
+	   HAL_Delay (2000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
