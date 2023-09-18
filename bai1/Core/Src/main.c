@@ -91,10 +91,48 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  int led_on = 0;
+  int count = 0;
   while (1)
   {
     /* USER CODE END WHILE */
-   HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+   if(led_on == 0)
+   {
+	   //led red_on
+	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
+	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 1);
+	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 1);
+	   count++;
+	   if(count == 5)
+	   {
+		   led_on = 1;
+		   count = 0;
+	   }
+   }
+   else if(led_on == 1)
+   { // green on
+	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
+	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 1);
+	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 0);
+	   count++;
+	   if(count == 3)
+	   {
+	   		led_on = 2;
+	   		count = 0;
+	   	}
+   }
+   else if(led_on == 2)
+     {// yellow_on
+  	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
+  	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 0);
+  	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 1);
+  	   count++;
+  	   if(count == 2)
+  	   {
+  	   		led_on = 0;
+  	   		count = 0;
+  	   	}
+     }
    HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
