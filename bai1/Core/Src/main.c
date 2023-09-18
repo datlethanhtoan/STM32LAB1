@@ -91,9 +91,53 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  int led_on = 0;
+  int count1 = 0;
+  int count2 = 0;
   while (1)
   {
     /* USER CODE END WHILE */
+	  	  if(led_on == 0)
+	  	     {
+
+	  	  	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
+	  	  	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, 0);
+	  	  	   count1++;
+	  	  	   count2++;
+	  	  	    if(count2 == 3)
+	  	  		{
+	  	  		 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, 1);
+	  	  		 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, 0);
+	  	  	    }
+	  	  	   if(count1 == 5)
+	  	  	   {
+	  	  		   led_on = 1;
+	  	  		   count1 = 0;
+	  	  		   count2 = 0;
+	  	  		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
+	  	  	    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, 1);
+	  	  	    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
+	  	  		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 0);
+	  	  	   }
+	  	     }
+	  	     else if(led_on == 1)
+	  	     { // green on
+	  	  	   count1++;
+	  	  	   count2++;
+	  	  	 if(count2 == 3)
+	  	  	{
+	  	  	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 1);
+	  	  	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 0);
+	  	  	}
+	  	  	if(count1 == 5)
+	  	  	 {
+	  	  		led_on = 0;
+	  	  		count1 = 0;
+	  	  		count2 = 0;
+	  	  	 }
+	  	     }
+	  	     HAL_Delay(1000);
+	      /* USER CODE BEGIN 3 */
 
     /* USER CODE BEGIN 3 */
   }
@@ -149,7 +193,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8
-                          |GPIO_PIN_9|GPIO_PIN_10, GPIO_PIN_RESET);
+                          |GPIO_PIN_9|GPIO_PIN_10, GPIO_PIN_SET);
 
   /*Configure GPIO pins : PA5 PA6 PA7 PA8
                            PA9 PA10 */
