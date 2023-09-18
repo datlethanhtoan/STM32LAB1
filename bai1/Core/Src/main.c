@@ -97,46 +97,51 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  	  if(led_on == 0)
-	  	     {
-
-	  	  	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
-	  	  	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, 0);
-	  	  	   count1++;
-	  	  	   count2++;
-	  	  	    if(count2 == 3)
-	  	  		{
-	  	  		 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, 1);
-	  	  		 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, 0);
-	  	  	    }
-	  	  	   if(count1 == 5)
-	  	  	   {
-	  	  		   led_on = 1;
-	  	  		   count1 = 0;
-	  	  		   count2 = 0;
-	  	  		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
-	  	  	    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, 1);
-	  	  	    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
-	  	  		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 0);
-	  	  	   }
-	  	     }
-	  	     else if(led_on == 1)
-	  	     { // green on
-	  	  	   count1++;
-	  	  	   count2++;
-	  	  	 if(count2 == 3)
-	  	  	{
-	  	  	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 1);
-	  	  	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 0);
-	  	  	}
-	  	  	if(count1 == 5)
-	  	  	 {
-	  	  		led_on = 0;
-	  	  		count1 = 0;
-	  	  		count2 = 0;
-	  	  	 }
-	  	     }
-	  	     HAL_Delay(1000);
+	  if(led_on == 0)
+	    {
+	 	   //led red_on
+	 	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
+	 	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, 0);
+	 	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 1);
+	 	   count1++;
+	 	   count2++;
+	 	   if(count2 == 3)
+	 	   {
+	 		 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, 1);
+	 		 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, 0);
+	 		 count2 = 0;
+	 	   }
+	 	   if(count1 == 5)
+	 	   {
+	 		   led_on = 1;
+	 		   count1 = 0;
+	 	   }
+	    }
+	    else if(led_on == 1)
+	    { // green on
+	 	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
+	 	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 0);
+	 	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, 1);
+	 	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
+	 	   count1++;
+	 	   if(count1 == 3)
+	 	   {
+	 	   		led_on = 2;
+	 	   		count1 = 0;
+	 	   	}
+	    }
+	    else if(led_on == 2)
+	      {// yellow_on
+	   	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 0);
+	   	   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 1);
+	   	   count1++;
+	   	   if(count1 == 2)
+	   	   {
+	   	   		led_on = 0;
+	   	   		count1 = 0;
+	   	   	}
+	      }
+	    HAL_Delay(1000);
 	      /* USER CODE BEGIN 3 */
 
     /* USER CODE BEGIN 3 */
