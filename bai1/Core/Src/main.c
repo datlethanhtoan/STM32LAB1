@@ -50,6 +50,15 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 void clearNumberOnClock(int);
 void setNumberOnClock(int);
+int state_pin(int pin)
+{
+    GPIO_PinState pinState = HAL_GPIO_ReadPin(GPIOA, pin);
+    if (pinState == GPIO_PIN_SET) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -94,30 +103,65 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   int hour, minute,  second = 0;
-  int count_s = 0;
+  int count_s, count_m, count_h = 0;
   while (1)
   {
 	  /* USER CODE END WHILE */
-	  setNumberOnClock(hour);
-	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_[count_s]) == 1)
-	 {
-		  count_s++;
+	  if(count_s/5 ==11)
+		  second =1;
+	   if(count_m/5 ==11)
+	 		  minute =1;
+	 	if(count_h/5 ==11)
+	 		  hour =1;
+	  if(count_s % 5 == 0)
+	  {
+		  if(count_s == 0 && second == 1 )
+		  {
+			  clearNumberOnClock(11);
+			  second = 0;
+		  }
+		  else
+			  clearNumberOnClock(count_s /5 - 1);
+		  setNumberOnClock(count_s/5);
 	  }
-	 	 	 setNumberOnClock(minute);
-	 	 	 setNumberOnClock(second);
-	 	 	 count_s += 1;
-	 	 	  int temp = count_s % 5;
-	 	 	  if(temp == 0)
-	 	 	  {
-	 	 		  second++;
-	 	 		  if(second > 11)
-	 	 		  {
-	 	 			  second = 0;
-	 	 			  count_s = 0;
-	 	 		  }
-	 	 	  }
-
-	 	    HAL_Delay(1000);
+	  if(count_m % 5 == 0)
+	  	  {
+	  		  if(count_m == 0 && minute == 1)
+	  		  {
+	  			  clearNumberOnClock(11);
+	  			  minute= 0;
+	  		  }
+	  		  else
+	  			  clearNumberOnClock(count_m /5 - 1);
+	  		  setNumberOnClock(count_m/5);
+	  	  }
+	  if(count_h % 5 == 0)
+		  {
+			  if(count_h == 0 && hour == 1 )
+			  {
+				  clearNumberOnClock(11);
+				  hour = 0;
+			  }
+			  else
+				  clearNumberOnClock(count_h /5 - 1);
+			  setNumberOnClock(count_h/5);
+		  }
+	  count_s++;
+     if(count_h > 11)
+     {
+    	 count_h = 0;
+     }
+     if(count_m >= 60)
+     {
+    	 count_h++;
+    	 count_m = 0;
+     }
+     if(count_s >= 60)
+     {
+    	 count_m++;
+    	 count_s = 0;
+     }
+	  HAL_Delay(10);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
