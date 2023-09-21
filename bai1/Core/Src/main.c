@@ -93,12 +93,18 @@ int main(void)
   /* USER CODE BEGIN WHILE */
    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 1);
+   int count= 0;
    while (1)
    {
     /* USER CODE END WHILE */
+	   if(count == 2)
+	   {
 	   HAL_GPIO_TogglePin (GPIOA , GPIO_PIN_5 );
 	   HAL_GPIO_TogglePin (GPIOA , GPIO_PIN_6 );
-	   HAL_Delay (2000);
+	   count = 0;
+	   }
+	   count ++;
+	   HAL_Delay (1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
