@@ -208,6 +208,8 @@ void display7SEG(int num)
  	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0 |GPIO_PIN_1 |GPIO_PIN_2 |GPIO_PIN_3 |GPIO_PIN_6 |GPIO_PIN_5, 0);
  	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4,1);
  	break;
+ default:
+	break;
  }
  }
 /* USER CODE BEGIN 4 */
