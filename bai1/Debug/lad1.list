@@ -203,12 +203,11 @@ int main(void)
  80001e2:	2300      	movs	r3, #0
  80001e4:	60fb      	str	r3, [r7, #12]
 	  }
-	  HAL_Delay(10);
- 80001e6:	200a      	movs	r0, #10
- 80001e8:	f000 f9e2 	bl	80005b0 <HAL_Delay>
+	  HAL_Delay(1000);
+ 80001e6:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+ 80001ea:	f000 f9e1 	bl	80005b0 <HAL_Delay>
 	  clearAllClock();
- 80001ec:	e7c9      	b.n	8000182 <main+0x1e>
- 80001ee:	bf00      	nop
+ 80001ee:	e7c8      	b.n	8000182 <main+0x1e>
  80001f0:	66666667 	.word	0x66666667
 
 080001f4 <setNumberOnClock>:
